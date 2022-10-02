@@ -1,0 +1,23 @@
+.login {
+  background: var(--color-blue);
+  padding: 16px;
+}
+
+.login:disabled {
+  background: grey;
+  cursor: not-allowed;
+}
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.form-input {
+  width: 400px;
+  margin-right: 10px;
+  padding: 20px;
+  color: black;
+}

@@ -1,41 +1,24 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { useState } from "react";
-import Chat from "./Chat";
+import { useEffect, useState, createContext } from "react";
+
+import { AuthenticatedApp } from "./components/AuthenticatedApp";
+import { UnauthenticatedApp } from "./components/UnauthenticatedApp";
+
+export const userContext = createContext();
 
 function App() {
-  const [userName, setUserName] = useState("");
-  const [room, setRoom] = useState("");
-  const [showChat, setShowChat] = useState(false);
+  const [user, setUser] = useState(null);
 
-  const joinChat = () => {
-    if (userName !== "" && room !== "") {
-      setShowChat(true);
-    }
-  };
+  // Get users from firebase
+  useEffect(() => {});
 
   return (
-    <div className="App">
-      {!showChat ? (
-        <div className="joinOuterContainer">
-          <h3>Join Chat</h3>
-          <input
-            type="text"
-            placeholder="Username"
-            onChange={(e) => setUserName(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Room"
-            onChange={(e) => setRoom(e.target.value)}
-          />
-          <button onClick={joinChat}>Join</button>
-        </div>
-      ) : (
-        <div className="chatOuterContainer">
-          <Chat userName={userName} room={room} />
-        </div>
-      )}
+    <div className="container">
+      <h1>Chat Room</h1>
+      <userContext.Provider value={{ user, setUser }}>
+        {user === null ? <UnauthenticatedApp /> : <AuthenticatedApp />}
+        {/* <UnauthenticatedApp /> */}
+      </userContext.Provider>
     </div>
   );
 }

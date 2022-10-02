@@ -1,0 +1,24 @@
+.chat-room-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 200px;
+}
+
+.chat-room-list li {
+  height: 100px;
+  background: var(--color-gray);
+  flex: 1 1 calc(50% - 4px);
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  transition: font-size 0.2s ease-in-out;
+}
+
+.chat-room-list li:hover {
+  background: var(--color-blue);
+  color: var(--color-white);
+  font-size: 18px;
+}
