@@ -1,27 +1,34 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addUser } from "../../redux/slices/userSlice";
+import { useState, useContext } from "react";
+import { userContext } from "../../App";
+import "./styles.css";
 
 function UnauthenticatedApp() {
   const [userName, setUserName] = useState("");
-  const dispatch = useDispatch();
+  const { setUser } = useContext(userContext);
 
   const login = () => {
-    const user = userName;
-    dispatch(addUser(user));
+    if (userName === "") return;
+
+    setUser(userName);
   };
 
   return (
     <>
-      <h2>Enter UserName to join a Chat Room!</h2>
-      <div>
+      <h2>Enter a username to join a Chat Room!</h2>
+      <div className="form">
         <input
+          required
+          className="form-input"
           type="text"
           placeholder="Enter UserName"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
         />
-        <button onClick={login} className="login">
+        <button
+          disabled={userName === ""}
+          onClick={() => login()}
+          className="login"
+        >
           Join
         </button>
       </div>

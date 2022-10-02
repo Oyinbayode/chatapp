@@ -4,7 +4,7 @@ import "./styles.css";
 const chatRoom = [
   {
     id: "general",
-    title: "General Chat",
+    title: " 📣 General Chat",
   },
 ];
 

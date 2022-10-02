@@ -1,5 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import "./styles.css";
+import { MessageInput } from "../messageInput";
+import { MessageList } from "../MessageList";
+// import { userContext } from "../../App";
+import React from "react";
 
 const chatRoom = [
   {
@@ -18,7 +22,11 @@ function ChatRoom() {
       <div>
         <Link to="/">⬅️ Back to all rooms</Link>
       </div>
-      <div className="messages-container">{/* TODO */}</div>
+      <div className="messages-container">
+        <MessageList roomId={room.id} />
+
+        <MessageInput roomId={room.id} />
+      </div>
     </>
   );
 }
