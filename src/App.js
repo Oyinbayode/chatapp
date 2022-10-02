@@ -1,24 +1,24 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { useEffect, useState } from "react";
-import Chat from "./Chat";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState, createContext } from "react";
+
 import { AuthenticatedApp } from "./components/AuthenticatedApp";
 import { UnauthenticatedApp } from "./components/UnauthenticatedApp";
-import { emptyUser } from "./redux/slices/userSlice";
+
+export const userContext = createContext();
 
 function App() {
-  const user = useSelector((state) => state.user.userName);
-  const dispatch = useDispatch();
+  const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   dispatch(emptyUser());
-  // });
+  // Get users from firebase
+  useEffect(() => {});
 
   return (
     <div className="container">
       <h1>Chat Room</h1>
-      {user !== null ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+      <userContext.Provider value={{ user, setUser }}>
+        {user === null ? <UnauthenticatedApp /> : <AuthenticatedApp />}
+        {/* <UnauthenticatedApp /> */}
+      </userContext.Provider>
     </div>
   );
 }
