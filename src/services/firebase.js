@@ -23,23 +23,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-async function loginWithGoogle() {
-  try {
-    const provider = new GoogleAuthProvider();
-    const auth = getAuth();
-
-    const { user } = await signInWithPopup(auth, provider);
-
-    return { uid: user.uid, displayName: user.displayName };
-  } catch (error) {
-    if (error.code !== "auth/cancelled-popup-request") {
-      console.error(error);
-    }
-
-    return null;
-  }
-}
-
 // Send a message to the Firebase DB
 async function SendMessage(roomId, user, text) {
   try {
@@ -66,7 +49,6 @@ async function AddUser(user) {
 }
 
 function getMessages(roomId, callback) {
-  console.log("getMessages", roomId);
   return onSnapshot(
     query(
       collection(db, "chat-rooms", roomId, "messages"),
@@ -77,10 +59,10 @@ function getMessages(roomId, callback) {
         id: doc.id,
         ...doc.data(),
       }));
-      console.log("messages", messages);
+
       callback(messages);
     }
   );
 }
 
-export { SendMessage, db, getMessages, AddUser, loginWithGoogle };
+export { SendMessage, db, getMessages, AddUser };
