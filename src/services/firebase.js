@@ -8,7 +8,6 @@ import {
   query,
   orderBy,
 } from "firebase/firestore";
-import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAImgIrmHmpkuPZc4CboYnYMR_FAjXiKms",
